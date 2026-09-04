@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount artifacts so you can drop in a retrained model without rebuilding the image.
+      - ./artifacts:/app/artifacts
+    environment:
+      - CONFIDENCE_THRESHOLD=70.0
+      - MIN_LEAF_COLOR_FRACTION=0.10
+      - CORS_ORIGINS=*
+    restart: unless-stopped
